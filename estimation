@@ -1,0 +1,21 @@
+rm(list = ls())
+library(graphics); library(compositions); library(mgcv);library(ydroGOF);library(psych)
+setwd("C:/.......")
+
+filename<-"p1.csv"; 
+data<-read.csv(file=filename, header=TRUE, sep = ";", dec = "."); 
+data0W<-data; 
+levels(data0W$DEP)
+
+kk<-4
+iidep<-1
+for (iidep in 1:length(levels(data0W$DEP))) {
+  depart<-levels(data0W$DEP)[iidep];
+  data<-data0W[data0W$DEP==depart,]; 
+  CA<-data[,4]; TU<-data[,5]; PH<-data[,6]; CR<-data[,7];
+  CT<-data[,2]; 
+  Mod_GAM1 = gam(CT ~ s(CR,k=kk)+s(CA,k=kk), family=gaussian) 
+  summary(Mod_GAM1)
+  predict1<-predict.gam(Mod_GAM1)
+  m=print(predict1)
+}
