@@ -17,5 +17,5 @@ for (iidep in 1:length(levels(data0W$DEP))) {
   Mod_GAM1 = gam(CT ~ s(CR,k=kk)+s(CA,k=kk), family=gaussian) 
   summary(Mod_GAM1)
   predict1<-predict.gam(Mod_GAM1)
-  m=print(predict1)
+  print(predict1)
 }
